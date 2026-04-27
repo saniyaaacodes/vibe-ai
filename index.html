@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vibe AI</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+    body{
+      margin:0;
+      font-family:'Poppins', sans-serif;
+      background: linear-gradient(135deg,#0f0c29,#302b63,#ff2e93);
+      color:white;
+      text-align:center;
+    }
+
+    h1{
+      margin-top:35px;
+      font-size:2.4rem;
+    }
+
+    p{
+      opacity:0.85;
+      margin-bottom:10px;
+    }
+
+    .input-area{
+      margin-top:20px;
+    }
+
+    input{
+      padding:14px;
+      width:260px;
+      border:none;
+      border-radius:14px;
+      outline:none;
+      box-shadow:0 0 18px rgba(255,46,147,0.25);
+    }
+
+    button{
+      padding:14px 18px;
+      border:none;
+      border-radius:14px;
+      background: linear-gradient(135deg,#ff2e93,#ff6bb5);
+      color:white;
+      cursor:pointer;
+      margin-left:8px;
+      transition:0.3s;
+    }
+
+    button:hover{
+      transform:scale(1.05);
+    }
+
+    /* RESULT GRID */
+    #result{
+      margin-top:25px;
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap:15px;
+      padding:20px;
+      max-width:900px;
+      margin-left:auto;
+      margin-right:auto;
+    }
+
+    .card{
+      background: rgba(255,255,255,0.10);
+      border:1px solid rgba(255,255,255,0.18);
+      border-radius:18px;
+      backdrop-filter: blur(12px);
+      box-shadow:0 10px 30px rgba(0,0,0,0.35);
+      padding:15px;
+      text-align:left;
+      animation: pop 0.3s ease;
+      transition:0.3s;
+    }
+
+    .card:hover{
+      transform:scale(1.03);
+    }
+
+    .title{
+      font-weight:600;
+      margin-bottom:8px;
+      color:#ffd1ea;
+    }
+
+    @keyframes pop{
+      from{opacity:0; transform:scale(0.85)}
+      to{opacity:1; transform:scale(1)}
+    }
+
+    .big{
+      grid-column:1/-1;
+      text-align:center;
+      font-size:18px;
+      color:#fff;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<h1>✨ Vibe AI</h1>
+<p>type your mood and feel your vibe</p>
+
+<div class="input-area">
+  <input id="mood" placeholder="e.g. sad, love, study, cinematic" />
+  <button onclick="generate()">Check</button>
+</div>
+
+<div id="result"></div>
+
+<script>
+function generate(){
+
+  const input = document.getElementById("mood").value.toLowerCase();
+  const result = document.getElementById("result");
+
+  let data = null;
+
+  if(input.includes("sad") || input.includes("lonely") || input.includes("cry")){
+    data = {
+      vibe:"Sad Vibe 💔",
+      music:"Billie Eilish / Lana Del Rey",
+      outfit:"Oversized hoodie + comfy pants",
+      color:"Black, grey, dark blue",
+      quote:"Even silence has feelings 💔"
+    };
+  }
+
+  else if(input.includes("love") || input.includes("romantic") || input.includes("crush")){
+    data = {
+      vibe:"Romantic Vibe 💕",
+      music:"Taylor Swift / soft love songs",
+      outfit:"Floral dress / soft aesthetic",
+      color:"Pink, white, cream",
+      quote:"You are someone's favorite feeling 💕"
+    };
+  }
+
+  else if(input.includes("study") || input.includes("focus") || input.includes("exam")){
+    data = {
+      vibe:"Study Mode 📚",
+      music:"Lo-fi beats",
+      outfit:"Hoodie + comfy fit",
+      color:"Neutral tones",
+      quote:"Small progress is still progress 📚"
+    };
+  }
+
+  else if(input.includes("cinematic") || input.includes("main") || input.includes("aesthetic")){
+    data = {
+      vibe:"Main Character Energy 🎬",
+      music:"Indie / cinematic pop",
+      outfit:"Trench coat + boots",
+      color:"Beige, brown, gold",
+      quote:"Act like you're in a movie 🎬"
+    };
+  }
+
+  else{
+    result.innerHTML = `<div class='card big'>🤖 I couldn't understand your vibe 😭 Try: sad / love / study / cinematic</div>`;
+    return;
+  }
+
+  result.innerHTML = 
+    <div class='card big'>🤖 ${data.vibe}</div>
+
+    <div class='card'>
+      <div class='title'>🎧 Music</div>
+      ${data.music}
+    </div>
+
+    <div class='card'>
+      <div class='title'>👗 Outfit</div>
+      ${data.outfit}
+    </div>
+
+    <div class='card'>
+      <div class='title'>🌈 Color Palette</div>
+      ${data.color}
+    </div>
+
+    <div class='card'>
+      <div class='title'>💬 Quote</div>
+      ${data.quote}
+    </div>
+  ;
+}
+</script>
+
+</body>
+</html>
